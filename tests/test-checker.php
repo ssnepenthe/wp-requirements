@@ -16,7 +16,7 @@ class Checker_Test extends WP_UnitTestCase {
 	function it_is_instantiable() {
 		$c = new Checker( '', '' );
 
-		$this->assertInstanceOf( Checker::class, $c );
+		$this->assertInstanceOf( 'WP_Plugin_Requirements\\Checker', $c );
 	}
 
 	/** @test */
@@ -42,17 +42,17 @@ class Checker_Test extends WP_UnitTestCase {
 		$c = new Checker( '', '' );
 
 		$this->assertInstanceOf(
-			Checker::class,
+			'WP_Plugin_Requirements\\Checker',
 			$c->add_check( function() { return true; }, '' )
 		);
 		$this->assertInstanceOf(
-			Checker::class,
+			'WP_Plugin_Requirements\\Checker',
 			$c->add_requirement(
 				new Closure_Requirement( function() { return true; }, '' )
 			)
 		);
 		$this->assertInstanceOf(
-			Checker::class,
+			'WP_Plugin_Requirements\\Checker',
 			Checker::make( '', '' )->add_check( function() { return true; }, '' )
 		);
 	}
@@ -163,29 +163,28 @@ class Checker_Test extends WP_UnitTestCase {
 	/**
 	 * Not particularly robust but it should do the trick...
 	 */
-	protected function manipulate_version( $version, $operation = 'simplify' ) {
-		$operations = [ 'incr', 'decr', 'simplify' ];
+	protected function manipulate_version( $version, $operation = 'incr' ) {
+		$operations = [ 'incr', 'decr' ];
 
 		if ( ! in_array( $operation, $operations, true ) ) {
-			$operation = 'simplify';
+			$operation = 'incr';
 		}
 
 		// Explode on "." and get the first three parts cast to int.
 		$bits = array_map( 'intval', array_slice( explode( '.', $version ), 0, 3 ) );
 
-		if ( 3 === count( $bits ) ) {
-			$key = 2;
-		} else {
-			$key = 1;
-		}
+		for ( $i = count( $bits ) - 1; $i >= 0; $i-- ) {
+			if ( $operation === 'incr' ) {
+				$bits[ $i ] += 1;
+				break;
+			}
 
-		switch ( $operation ) {
-			case 'incr':
-				$bits[ $key ] += 1;
-				break;
-			case 'decr':
-				$bits[ $key ] -= 1;
-				break;
+			if ( 0 === $bits[ $i ] ) {
+				continue;
+			}
+
+			$bits[ $i ] -= 1;
+			break;
 		}
 
 		return implode( '.', $bits );
@@ -196,7 +195,7 @@ class Checker_Test extends WP_UnitTestCase {
 	 * Input of "7.0.15-1+deb.sury.org~trusty+1" or "7.0.15" returns "7.0.16".
 	 */
 	protected function incr_version( $version ) {
-		return $this->manipulate_version( $version, 'incr' );
+		return $this->manipulate_version( $version );
 	}
 
 	/**
@@ -205,13 +204,5 @@ class Checker_Test extends WP_UnitTestCase {
 	 */
 	protected function decr_version( $version ) {
 		return $this->manipulate_version( $version, 'decr' );
-	}
-
-	/**
-	 * Input of "4.8-alpha-39357-src" returns "4.8".
-	 * Input of "7.0.15-1+deb.sury.org~trusty+1" returns "7.0.15".
-	 */
-	protected function simplify_version( $version ) {
-		return $this->manipulate_version( $version );
 	}
 }

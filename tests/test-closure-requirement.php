@@ -16,8 +16,11 @@ class Closure_Requirement_Test extends PHPUnit_Framework_TestCase {
 	function it_is_instantiable() {
 		$r = new Closure_Requirement( function() {}, 'message' );
 
-		$this->assertInstanceOf( Requirement_Interface::class, $r );
-		$this->assertInstanceOf( Closure_Requirement::class, $r );
+		$this->assertInstanceOf(
+			'WP_Plugin_Requirements\\Requirement_Interface',
+			$r
+		);
+		$this->assertInstanceOf( 'WP_Plugin_Requirements\\Closure_Requirement', $r );
 	}
 
 	/** @test */
