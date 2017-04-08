@@ -113,7 +113,10 @@ class Checker_Test extends WP_UnitTestCase {
 
 		$this->assertFalse( $c2->requirements_met() );
 		$this->assertEquals(
-			'<div class="notice notice-error"><p>Some Plugin deactivated: PHP 7.0.16 or newer is required</p></div>',
+			sprintf(
+				'<div class="notice notice-error"><p>Some Plugin deactivated: PHP %s or newer is required</p></div>',
+				$c2_version
+			),
 			$this->capture_admin_notice( $c2 )
 		);
 	}
@@ -138,7 +141,10 @@ class Checker_Test extends WP_UnitTestCase {
 
 		$this->assertFalse( $c2->requirements_met() );
 		$this->assertEquals(
-			'<div class="notice notice-error"><p>Some Plugin deactivated: WordPress 4.9 or newer is required</p></div>',
+			sprintf(
+				'<div class="notice notice-error"><p>Some Plugin deactivated: WordPress %s or newer is required</p></div>',
+				$c2_version
+			),
 			$this->capture_admin_notice( $c2 )
 		);
 	}
