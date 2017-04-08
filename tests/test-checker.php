@@ -164,7 +164,7 @@ class Checker_Test extends WP_UnitTestCase {
 	 * Not particularly robust but it should do the trick...
 	 */
 	protected function manipulate_version( $version, $operation = 'incr' ) {
-		$operations = [ 'incr', 'decr' ];
+		$operations = array( 'incr', 'decr' );
 
 		if ( ! in_array( $operation, $operations, true ) ) {
 			$operation = 'incr';
