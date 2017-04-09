@@ -138,7 +138,7 @@ class Checker {
 	 */
 	public function notify() {
 		if ( $this->requirements_met() ) {
-			return '';
+			return;
 		}
 
 		echo '<div class="notice notice-error">';
