@@ -1,5 +1,5 @@
 {
-    "name": "ssnepenthe/wp-plugin-requirements",
+    "name": "ssnepenthe/wp-requirements",
     "description": "Helper for declaring dependencies in a WordPress plugin.",
     "type": "library",
     "require": {

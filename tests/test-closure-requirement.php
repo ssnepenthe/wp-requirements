@@ -2,14 +2,14 @@
 /**
  * Class Closure_Requirement_Test
  *
- * @package WP_Plugin_Requirements
+ * @package WP_Requirements
  */
 
-namespace WP_Plugin_Requirements_Tests;
+namespace WP_Requirements_Tests;
 
 use PHPUnit_Framework_TestCase;
-use WP_Plugin_Requirements\Closure_Requirement;
-use WP_Plugin_Requirements\Requirement_Interface;
+use WP_Requirements\Closure_Requirement;
+use WP_Requirements\Requirement_Interface;
 
 class Closure_Requirement_Test extends PHPUnit_Framework_TestCase {
 	/** @test */
@@ -17,10 +17,10 @@ class Closure_Requirement_Test extends PHPUnit_Framework_TestCase {
 		$r = new Closure_Requirement( function() {}, 'message' );
 
 		$this->assertInstanceOf(
-			'WP_Plugin_Requirements\\Requirement_Interface',
+			'WP_Requirements\\Requirement_Interface',
 			$r
 		);
-		$this->assertInstanceOf( 'WP_Plugin_Requirements\\Closure_Requirement', $r );
+		$this->assertInstanceOf( 'WP_Requirements\\Closure_Requirement', $r );
 	}
 
 	/** @test */

@@ -2,10 +2,10 @@
 /**
  * Closure_Requirement class.
  *
- * @package WP_Plugin_Requirements
+ * @package WP_Requirements
  */
 
-namespace WP_Plugin_Requirements;
+namespace WP_Requirements;
 
 use Closure;
 

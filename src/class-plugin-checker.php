@@ -1,23 +1,23 @@
 <?php
 /**
- * Checker class.
+ * Plugin_Checker class.
  *
- * @package WP_Plugin_Requirements
+ * @package WP_Requirements
  */
 
-namespace WP_Plugin_Requirements;
+namespace WP_Requirements;
 
 use Closure;
 
 /**
- * Defines the checker class.
+ * Defines the plugin checker class.
  *
  * Should work down to PHP 5.3. I have no intention of matching WordPress support
  * down to 5.2 since we rely on Composer which requires 5.3.2.
  *
  * @todo Add support for soft requirements?
  */
-class Checker {
+class Plugin_Checker {
 	/**
 	 * Path to plugin file - used to deactivate the plugin.
 	 *

@@ -1,4 +1,4 @@
-# wp-plugin-requirements
+# wp-requirements
 Helper for declaring dependencies in a WordPress plugin.
 
 ## Requirements
@@ -8,7 +8,7 @@ WordPress, PHP 5.3 or later and Composer.
 Install using Composer:
 
 ```
-$ composer require ssnepenthe/wp-plugin-requirements
+$ composer require ssnepenthe/wp-requirements
 ```
 
 ## Usage
@@ -17,9 +17,9 @@ This package provides a simple method for ensuring that WordPress plugins fail g
 Create a checker instance in your main plugin file (e.g. `my-plugin/my-plugin.php`):
 
 ```PHP
-use WP_Plugin_Requirements\Checker;
+use WP_Requirements\Plugin_Checker;
 
-$checker = new Checker( 'My Awesome Plugin', __FILE__ );
+$checker = new Plugin_Checker( 'My Awesome Plugin', __FILE__ );
 ```
 
 Where the first parameter is the name of your plugin (used for notifications when requirements are not met) and the second parameter is the path to your main plugin file (used to deactivate the plugin).
@@ -55,12 +55,12 @@ $checker->add_check(
 );
 ```
 
-The Checker class also provides a fluent interface:
+The Plugin_Checker class also provides a fluent interface:
 
 ```PHP
-use WP_Plugin_Requirements\Checker;
+use WP_Requirements\Plugin_Checker;
 
-$checker = Checker::make( 'My Awesome Plugin', __FILE__ )
+$checker = Plugin_Checker::make( 'My Awesome Plugin', __FILE__ )
     ->function_exists( 'cmb2_bootstrap' )
     ->php_at_least( '5.6' )
     ->wp_at_least( '4.7' );

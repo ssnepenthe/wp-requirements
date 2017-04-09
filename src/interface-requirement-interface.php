@@ -2,10 +2,10 @@
 /**
  * Requirement_Interface interface.
  *
- * @package WP_Plugin_Requirements
+ * @package WP_Requirements
  */
 
-namespace WP_Plugin_Requirements;
+namespace WP_Requirements;
 
 /**
  * Defines a requirement interface.
