@@ -118,6 +118,22 @@ class Plugin_Checker {
 	}
 
 	/**
+	 * Add a check for a PHP extension.
+	 *
+	 * @param  string $extension PHP extension to check for.
+	 *
+	 * @return self
+	 */
+	public function extension_loaded( $extension ) {
+		return $this->add_check(
+			function() use ( $extension ) {
+				return extension_loaded( $extension );
+			},
+			sprintf( 'The %s extension is required but not loaded', $extension )
+		);
+	}
+
+	/**
 	 * Add a check for the existence of a specific function.
 	 *
 	 * @param  string $function Function to check for.

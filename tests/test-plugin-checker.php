@@ -81,6 +81,25 @@ class Plugin_Checker_Test extends WP_UnitTestCase {
 	}
 
 	/** @test */
+	function it_can_check_extension_loaded() {
+		$c1 = new Plugin_Checker( 'Some Plugin', '' );
+		// Should be enabled by default.
+		$c1->extension_loaded( 'dom' );
+
+		$c2 = new Plugin_Checker( 'Some Plugin', '' );
+		$c2->extension_loaded( 'fake-ext' );
+
+		$this->assertTrue( $c1->requirements_met() );
+		$this->assertEquals( '', $this->capture_admin_notice( $c1 ) );
+
+		$this->assertFalse( $c2->requirements_met() );
+		$this->assertEquals(
+			'<div class="notice notice-error"><p>Some Plugin deactivated: The fake-ext extension is required but not loaded</p></div>',
+			$this->capture_admin_notice( $c2 )
+		);
+	}
+
+	/** @test */
 	function it_can_check_function_existence() {
 		$c1 = new Plugin_Checker( 'Some Plugin', '' );
 		$c1->function_exists( 'phpversion' );

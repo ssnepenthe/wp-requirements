@@ -30,6 +30,9 @@ Then add any number of requirements. All of the following are valid:
 // Verify that the Debug_Bar class exists - an indirect way of verifying that the Debug_Bar plugin is active.
 $checker->class_exists( 'Debug_Bar' );
 
+// Verify that the DOM extension is loaded.
+$checker->extension_loaded( 'dom' );
+
 // Verify that the cmb2_bootstrap() function exists - an indirect way of verifying that the CMB2 plugin is active.
 $checker->function_exists( 'cmb2_bootstrap' );
 
